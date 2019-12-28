@@ -1,0 +1,60 @@
+﻿@model SignalR_UserControl.Models.user
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login | Giriş Yap </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #login-div {
+            width:25%;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:25%;
+            border:1px solid #ccc;
+            padding:10px 10px;
+        }
+        .field-validation-error {
+            color:red;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="login-div">
+            @using (Html.BeginForm("Verify", "Account", FormMethod.Post))
+            {
+                <div class="form-group">
+                    Kullanıcı Adı
+                    @Html.TextBoxFor(user => user.userName, null, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+                </div>
+                <div class="form-group">
+                    @Html.ValidationMessageFor(user => user.userName,null,new { @class="field-validation-error"})
+                </div>
+                <div class="form-group">
+                    Parola
+                    @Html.TextBoxFor(user => user.userPassword, null, new { @class = "form-control", placeholder = "Parola" })
+                </div>
+                <div class="form-group">
+                    @Html.ValidationMessageFor(user => user.userPassword,null,new { @class="field-validation-error"})
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="GİRİS YAP" />
+                </div>
+                <div class="form-group">
+                    <label class="field-validation-error">@Html.DisplayFor(user => user.LoginErrorMessage)</label>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
